@@ -4,7 +4,7 @@ return {
     lazy = false,
     priority = 100,
     keys = {
-      {"<leader><F5>", vim.cmd.UndotreeToggle, mode="n", desc="UndotreeToggle"},
+      {"<leader><F5>", vim.cmd.UndotreeToggle, desc="UndotreeToggle"},
     },
   },
 }
