@@ -238,6 +238,7 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -305,6 +306,8 @@ require('telescope').setup {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
+        ['<M-h>'] = "cycle_history_next",
+        ['<M-S-h>'] = "cycle_history_prev",
       },
     },
   },
@@ -466,6 +469,7 @@ local on_attach = function(_, bufnr)
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>st', require('telescope.builtin').treesitter, 'Treesitter definitions')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
