@@ -25,12 +25,12 @@ return {
         auto_trigger = true,
         debounce = 0,
         keymap = {
-          accept = "<M-l>",
-          accept_word = false,
-          accept_line = false,
+          accept = "<M-k>",
+          accept_word = "<M-o>",
+          accept_line = "<M-l>",
           next = "<M-]>",
           prev = "<M-[>",
-          dismiss = "<C-]>",
+          dismiss = "<C-e>",
         },
       },
       filetypes = {
@@ -47,5 +47,9 @@ return {
       copilot_node_command = 'node', -- Node.js version must be > 18.x
       server_opts_overrides = {},
     })
+
+    -- Toggle copilot suggestions start or stop
+    vim.keymap.set("n", "<M-s>", require("copilot.suggestion").toggle_auto_trigger,
+      { desc = "[copilot custom] Toggle copilot suggestions on/off" })
   end,
 }
