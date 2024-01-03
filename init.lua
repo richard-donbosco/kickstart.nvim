@@ -298,17 +298,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- Import trouble commands for telescope
+local trouble = require('trouble.providers.telescope')
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
     mappings = {
       i = {
+        ["<c-t>"] = trouble.open_with_trouble,
         ['<C-u>'] = false,
         ['<C-d>'] = false,
         ['<M-h>'] = "cycle_history_next",
         ['<M-S-h>'] = "cycle_history_prev",
       },
+      n = { ["<c-t>"] = trouble.open_with_trouble },
     },
   },
 }
