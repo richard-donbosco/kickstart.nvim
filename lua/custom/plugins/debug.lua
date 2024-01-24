@@ -81,26 +81,12 @@ return {
       -- :help dap-configuration
       dap_configurations = {
         -- {
+        --   -- Must be "go" or it will be ignored by the plugin
         --   type = "go",
-        --   name = "Debug",
-        --   request = "launch",
-        --   program = "${file}"
+        --   name = "Attach remote",
+        --   mode = "remote",
+        --   request = "attach",
         -- },
-        -- {
-        --   type = "go",
-        --   name = "Debug test", -- configuration for debugging test files
-        --   request = "launch",
-        --   mode = "test",
-        --   program = "${file}"
-        -- },
-        -- -- works with go.mod packages and sub packages
-        -- {
-        --   type = "go",
-        --   name = "Debug test (go.mod)",
-        --   request = "launch",
-        --   mode = "test",
-        --   program = "./${relativeFileDirname}"
-        -- }
       },
       -- delve configurations
       delve = {
