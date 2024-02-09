@@ -29,6 +29,9 @@ return {
       shfmt = {
         prepend_args = { "-i", "2" },
       },
+      isort = {
+        prepend_args = { "--profile", "black" },
+      },
     },
   },
   init = function()
