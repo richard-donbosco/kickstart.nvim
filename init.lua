@@ -271,6 +271,8 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- Setup python provider for neovim
+vim.g.python3_host_prog = '/home/a741670/.pyenv/versions/3.10.12/bin/python3'
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -545,7 +547,7 @@ local servers = {
     },
   },
   groovyls = {},
-  -- pyright = {},
+  pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },

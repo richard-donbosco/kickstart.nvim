@@ -12,6 +12,7 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mfussenegger/nvim-dap-python',
   },
   config = function()
     local dap = require 'dap'
@@ -126,5 +127,9 @@ return {
         build_flags = "",
       },
     }
+
+
+    -- Python adapter setup
+    require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
   end,
 }

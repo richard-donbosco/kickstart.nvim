@@ -32,6 +32,9 @@ return {
       isort = {
         prepend_args = { "--profile", "black" },
       },
+      black = {
+        prepend_args = { "--fast" },
+      },
     },
   },
   init = function()

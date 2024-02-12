@@ -3,6 +3,8 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-neotest/neotest-go",
+    "nvim-neotest/neotest-python",
+
     -- Your other test adapters here
     'mfussenegger/nvim-dap',
     'leoluz/nvim-dap-go',
@@ -24,6 +26,7 @@ return {
       -- your neotest config here
       adapters = {
         require("neotest-go") {},
+        require("neotest-python") {},
         require("dap-go").setup(),
       },
     })
