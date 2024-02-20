@@ -19,11 +19,12 @@ return {
     formatters_by_ft = {
       lua = { "stylua" },
       python = { "isort", "black" },
-      go = { "gofumpt", "golines", "goimports" }
+      go = { "gofumpt", "golines", "goimports" },
+      groovy = { "groovyfmt" },
       -- javascript = { { "prettierd", "prettier" } },
     },
     -- Set up format-on-save
-    format_on_save = { timeout_ms = 500, lsp_fallback = true },
+    format_on_save = { timeout_ms = 2000, lsp_fallback = true },
     -- Customize formatters
     formatters = {
       shfmt = {
@@ -34,6 +35,12 @@ return {
       },
       black = {
         prepend_args = { "--fast" },
+      },
+      groovyfmt = {
+        command = "npm-groovy-lint",
+        args = { "--format", "$FILENAME" },
+
+        stdin = false,
       },
     },
   },

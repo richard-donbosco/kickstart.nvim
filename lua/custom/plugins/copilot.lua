@@ -23,7 +23,7 @@ return {
       suggestion = {
         enabled = true,
         auto_trigger = true,
-        debounce = 0,
+        debounce = 3,
         keymap = {
           accept = "<M-k>",
           accept_word = "<M-o>",
