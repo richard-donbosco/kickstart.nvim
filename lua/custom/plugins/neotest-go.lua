@@ -25,8 +25,8 @@ return {
     require("neotest").setup({
       -- your neotest config here
       adapters = {
+        require("neotest-python"),
         require("neotest-go") {},
-        require("neotest-python") {},
         require("dap-go").setup(),
       },
     })
