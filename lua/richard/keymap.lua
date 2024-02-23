@@ -27,6 +27,10 @@ vim.keymap.set("n", "<leader>?l", require('neotest').run.run_last,
 -- Run the test under the cursor
 vim.keymap.set("n", "<leader>??", require('neotest').run.run,
 	{ desc = "[?] Run test function [b]lock on hover" })
+-- Debug file with dap
+vim.keymap.set("n", "<leader>?!", function() require('neotest').run.run({ strategy = "dap" }) end,
+	{ desc = "[?] Debug hovered function with [!] dap" })
+
 -- Run the tests in the current file
 vim.keymap.set("n", "<leader>?f", function() require('neotest').run.run(vim.fn.expand('%')) end,
 	{ desc = "[?] Run tests in current [f]ile" })
