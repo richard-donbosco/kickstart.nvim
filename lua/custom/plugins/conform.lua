@@ -20,7 +20,7 @@ return {
       lua = { "stylua" },
       python = { "isort", "black" },
       go = { "gofumpt", "golines", "goimports" },
-      groovy = { "groovyfmt" },
+      -- groovy = { "groovyfmt" },
       -- javascript = { { "prettierd", "prettier" } },
     },
     -- Set up format-on-save
@@ -36,12 +36,11 @@ return {
       black = {
         prepend_args = { "--fast" },
       },
-      groovyfmt = {
-        command = "npm-groovy-lint",
-        args = { "--format", "$FILENAME" },
-
-        stdin = false,
-      },
+      -- groovyfmt = {
+      --   command = "npm-groovy-lint",
+      --   args = { "--format", "$FILENAME" },
+      --   stdin = false,
+      -- },
     },
   },
   init = function()

@@ -546,7 +546,7 @@ local servers = {
       gofumpt = false,
     },
   },
-  groovyls = {},
+  -- groovyls = {},
   pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
