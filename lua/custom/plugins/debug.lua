@@ -81,6 +81,12 @@ return {
       -- represents a dap configuration. For more details do:
       -- :help dap-configuration
       dap_configurations = {
+        {
+          type = "go",
+          name = "Attach remote",
+          mode = "remote",
+          request = "attach",
+        },
         -- {
         --   type = "go",
         --   name = "Debug",

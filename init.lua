@@ -7,6 +7,9 @@ vim.g.maplocalleader = ' '
 -- Add column marker to prevent long lines.
 vim.opt.colorcolumn = "88"
 
+-- Modify the cursor
+vim.o.guicursor = 'n-v-c-sm-i-ci-ve:block,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -563,8 +566,17 @@ local servers = {
       -- diagnostics = { disable = { 'missing-fields' } },
     },
   },
-}
 
+  -- yamlls = {},
+
+  helm_ls = {
+    ['helm-ls'] = {
+      yamlls = {
+        path = "yaml-language-server",
+      }
+    }
+  },
+}
 -- Setup neovim lua configuration
 require('neodev').setup()
 
@@ -646,28 +658,29 @@ cmp.setup {
 require("richard.keymap")
 
 -- Add autocmd for gopls
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-    local params = vim.lsp.util.make_range_params()
-    params.context = { only = { "source.organizeImports" } }
-    -- buf_request_sync defaults to a 1000ms timeout. Depending on your
-    -- machine and codebase, you may want longer. Add an additional
-    -- argument after params if you find that you have to write the file
-    -- twice for changes to be saved.
-    -- E.g., vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
-    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
-    for cid, res in pairs(result or {}) do
-      for _, r in pairs(res.result or {}) do
-        if r.edit then
-          local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
-          vim.lsp.util.apply_workspace_edit(r.edit, enc)
-        end
-      end
-    end
-    vim.lsp.buf.format({ async = false })
-  end
-})
+-- Commented out before we are using conform
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = "*.go",
+--   callback = function()
+--     local params = vim.lsp.util.make_range_params()
+--     params.context = { only = { "source.organizeImports" } }
+--     -- buf_request_sync defaults to a 1000ms timeout. Depending on your
+--     -- machine and codebase, you may want longer. Add an additional
+--     -- argument after params if you find that you have to write the file
+--     -- twice for changes to be saved.
+--     -- E.g., vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
+--     local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+--     for cid, res in pairs(result or {}) do
+--       for _, r in pairs(res.result or {}) do
+--         if r.edit then
+--           local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+--           vim.lsp.util.apply_workspace_edit(r.edit, enc)
+--         end
+--       end
+--     end
+--     vim.lsp.buf.format({ async = false })
+--   end
+-- })
 
 -- Add autocmd for conform
 vim.api.nvim_create_autocmd("BufWritePre", {
