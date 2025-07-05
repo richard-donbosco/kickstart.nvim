@@ -13,9 +13,9 @@ return {
         extra_request_body = {
           timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
           temperature = 0.75,
-          max_completion_tokens = 16000, -- Increase this to include reasoning tokens (for reasoning models)
+          max_completion_tokens = 32000, -- Increase this to include reasoning tokens (for reasoning models)
           reasoning_effort = 'high', -- low|medium|high, only used for reasoning models
-          max_tokens = 20480,
+          max_tokens = 42000,
         },
       },
     },

@@ -5,7 +5,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Add column marker to prevent long lines.
-vim.opt.colorcolumn = "88"
+vim.opt.colorcolumn = '88'
 
 -- Modify the cursor
 vim.o.guicursor = 'n-v-c-sm-i-ci-ve:block,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
@@ -54,7 +54,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -79,7 +79,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -307,7 +307,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Import trouble commands for telescope
-local trouble = require('trouble.providers.telescope')
+local trouble = require 'trouble.providers.telescope'
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -315,13 +315,13 @@ require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-        ["<c-t>"] = trouble.open_with_trouble,
+        ['<c-t>'] = trouble.open_with_trouble,
         ['<C-u>'] = false,
         ['<C-d>'] = false,
-        ['<M-h>'] = "cycle_history_next",
-        ['<M-S-h>'] = "cycle_history_prev",
+        ['<M-h>'] = 'cycle_history_next',
+        ['<M-S-h>'] = 'cycle_history_prev',
       },
-      n = { ["<c-t>"] = trouble.open_with_trouble },
+      n = { ['<c-t>'] = trouble.open_with_trouble },
     },
   },
 }
@@ -366,8 +366,7 @@ end
 vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>s?', require('telescope.builtin').oldfiles,
-  { desc = 'Find/[S]earch [?] recently opened files' })
+vim.keymap.set('n', '<leader>s?', require('telescope.builtin').oldfiles, { desc = 'Find/[S]earch [?] recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -554,7 +553,24 @@ local servers = {
   },
   -- groovyls = {},
   pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {
+    ['rust-analyzer'] = {
+      imports = {
+        granularity = {
+          group = 'module',
+        },
+        prefix = 'self',
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true,
+      },
+    },
+  },
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
@@ -572,9 +588,9 @@ local servers = {
   helm_ls = {
     ['helm-ls'] = {
       yamlls = {
-        path = "yaml-language-server",
-      }
-    }
+        path = 'yaml-language-server',
+      },
+    },
   },
 }
 -- Setup neovim lua configuration
@@ -655,7 +671,7 @@ cmp.setup {
 }
 
 -- Add custom keymap
-require("richard.keymap")
+require 'richard.keymap'
 
 -- Add autocmd for gopls
 -- Commented out before we are using conform
@@ -682,30 +698,30 @@ require("richard.keymap")
 --   end
 -- })
 
--- Add autocmd for conform
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function(args)
-    require("conform").format({ bufnr = args.buf })
-  end,
-})
+-- -- Add autocmd for conform
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   pattern = '*',
+--   callback = function(args)
+--     require('conform').format { bufnr = args.buf }
+--   end,
+-- })
 
 -- Add autocmd for nvim lint
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*',
   callback = function()
-    require("lint").try_lint()
+    require('lint').try_lint()
   end,
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*',
   callback = function()
-    local save_cursor = vim.fn.getpos(".")
-    vim.cmd([[%s/\s\+$//e]])
-    vim.fn.setpos(".", save_cursor)
+    local save_cursor = vim.fn.getpos '.'
+    vim.cmd [[%s/\s\+$//e]]
+    vim.fn.setpos('.', save_cursor)
   end,
 })
