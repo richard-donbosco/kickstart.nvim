@@ -535,24 +535,24 @@ local servers = {
   },
   -- groovyls = {},
   pyright = {},
-  rust_analyzer = {
-    ['rust-analyzer'] = {
-      imports = {
-        granularity = {
-          group = 'module',
-        },
-        prefix = 'self',
-      },
-      cargo = {
-        buildScripts = {
-          enable = true,
-        },
-      },
-      procMacro = {
-        enable = true,
-      },
-    },
-  },
+  -- rust_analyzer = {
+  --   ['rust-analyzer'] = {
+  --     imports = {
+  --       granularity = {
+  --         group = 'module',
+  --       },
+  --       prefix = 'self',
+  --     },
+  --     cargo = {
+  --       buildScripts = {
+  --         enable = true,
+  --       },
+  --     },
+  --     procMacro = {
+  --       enable = true,
+  --     },
+  --   },
+  -- },
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
