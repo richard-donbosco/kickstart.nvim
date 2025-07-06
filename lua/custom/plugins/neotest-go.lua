@@ -1,5 +1,6 @@
 return {
   'nvim-neotest/neotest',
+  cond = false,
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-neotest/neotest-go',

@@ -18,39 +18,39 @@ vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to right window' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move to down window' })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to up window' })
 
---------------------
--- Neotest mappings
---------------------
--- Re run the last ran test
-vim.keymap.set('n', '<leader>?l', require('neotest').run.run_last, { desc = '[?] Re-run the last ran test' })
--- Run the test under the cursor
-vim.keymap.set('n', '<leader>??', require('neotest').run.run, { desc = '[?] Run test function [b]lock on hover' })
--- Debug file with dap
-vim.keymap.set('n', '<leader>?!', function()
-  require('neotest').run.run { strategy = 'dap' }
-end, { desc = '[?] Debug hovered function with [!] dap' })
-
--- Run the tests in the current file
-vim.keymap.set('n', '<leader>?f', function()
-  require('neotest').run.run(vim.fn.expand '%')
-end, { desc = '[?] Run tests in current [f]ile' })
--- Run the tests in the current directory, works based on the current buffer
-vim.keymap.set('n', '<leader>?d', function()
-  require('neotest').run.run(vim.fn.expand '%:p:h')
-end, { desc = '[?] Run tests in current [d]irectory' })
--- Run the tests based on the input path and args
-vim.keymap.set('n', '<leader>?i', function()
-  local input_path = vim.fn.input { prompt = 'Enter path:' }
-  local args = vim.fn.input { prompt = '[Optional] Enter args:' }
-  require('neotest').run.run { '' .. input_path, extra_args = { args } }
-end, { desc = '[?] Run tests in [i]nput relative path (to vim root dir) and args.' })
--- Run the tests in the project root directory (vim root dir)
-vim.keymap.set('n', '<leader>?p', function()
-  require('neotest').run.run(vim.fn.getcwd())
-end, { desc = '[?] Run tests in [r]relative path' })
-
--- Test summary toggle open/close
-vim.keymap.set('n', '<leader>?s', require('neotest').summary.toggle, { desc = '[?] Test [s]ummary window toggle open/close' })
+-- --------------------
+-- -- Neotest mappings
+-- --------------------
+-- -- Re run the last ran test
+-- vim.keymap.set('n', '<leader>?l', require('neotest').run.run_last, { desc = '[?] Re-run the last ran test' })
+-- -- Run the test under the cursor
+-- vim.keymap.set('n', '<leader>??', require('neotest').run.run, { desc = '[?] Run test function [b]lock on hover' })
+-- -- Debug file with dap
+-- vim.keymap.set('n', '<leader>?!', function()
+--   require('neotest').run.run { strategy = 'dap' }
+-- end, { desc = '[?] Debug hovered function with [!] dap' })
+--
+-- -- Run the tests in the current file
+-- vim.keymap.set('n', '<leader>?f', function()
+--   require('neotest').run.run(vim.fn.expand '%')
+-- end, { desc = '[?] Run tests in current [f]ile' })
+-- -- Run the tests in the current directory, works based on the current buffer
+-- vim.keymap.set('n', '<leader>?d', function()
+--   require('neotest').run.run(vim.fn.expand '%:p:h')
+-- end, { desc = '[?] Run tests in current [d]irectory' })
+-- -- Run the tests based on the input path and args
+-- vim.keymap.set('n', '<leader>?i', function()
+--   local input_path = vim.fn.input { prompt = 'Enter path:' }
+--   local args = vim.fn.input { prompt = '[Optional] Enter args:' }
+--   require('neotest').run.run { '' .. input_path, extra_args = { args } }
+-- end, { desc = '[?] Run tests in [i]nput relative path (to vim root dir) and args.' })
+-- -- Run the tests in the project root directory (vim root dir)
+-- vim.keymap.set('n', '<leader>?p', function()
+--   require('neotest').run.run(vim.fn.getcwd())
+-- end, { desc = '[?] Run tests in [r]relative path' })
+--
+-- -- Test summary toggle open/close
+-- vim.keymap.set('n', '<leader>?s', require('neotest').summary.toggle, { desc = '[?] Test [s]ummary window toggle open/close' })
 
 --------------------
 -- Trouble mappings
