@@ -1,0 +1,42 @@
+-----------------------------------------
+---- Hack to get apple connect token into llm provider adapters
+-----------------------------------------
+-- function set_env_var(key, value)
+--   os.execute('export ' .. key .. '=' .. tostring(value))
+-- end
+--
+-- function trim(s)
+--   return s:match '^%s*(.-)%s*$'
+-- end
+--
+-- function call_connect_cli(args)
+--   local cmd = 'appleconnect'
+--
+--   if args and type(args) == 'table' then
+--     for _, arg in ipairs(args) do
+--       cmd = cmd .. ' ' .. tostring(arg)
+--     end
+--   elseif args and type(args) == 'string' then
+--     cmd = cmd .. ' ' .. args
+--   end
+--
+--   local handle = io.popen(cmd)
+--   if not handle then
+--     error('Failed to execute the command:' .. cmd)
+--   end
+--   local result = handle:read '*a'
+--   local success = handle:close()
+--
+--   if not success then
+--     error('Command failed' .. cmd .. '\nOutput:' .. (result or ''))
+--   end
+--
+--   result = trim(result)
+--
+--   return result, success
+-- end
+--
+-- -- Test the function
+-- local output, _ =
+--   call_connect_cli "getToken -C hvys3fcwcteqrvw3qzkvtk86viuoqv --token-type=oauth --interactivity-type=none -E prod -G pkce -o openid,dsid,accountname,profile,groups | grep 'oauth-id' | cut -d' ' -f2"
+-- vim.env.OPENAI_API_KEY = output
