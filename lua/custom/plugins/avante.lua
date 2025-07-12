@@ -9,6 +9,7 @@ return {
     providers = {
       openai = {
         endpoint = 'http://localhost:11211/api/openai/v1',
+        -- endpoint = 'https://floodgate.g.apple.com/api/openai/v1',
         model = 'aws:anthropic.claude-sonnet-4-20250514-v1:0', -- your desired model (or use gpt-4o, etc.)
         extra_request_body = {
           timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
@@ -19,6 +20,18 @@ return {
         },
       },
     },
+    -- provider = 'claude',
+    -- providers = {
+    --   claude = {
+    --     endpoint = 'http://localhost:11211/api/anthropic',
+    --     model = 'aws:anthropic.claude-sonnet-4-20250514-v1:0',
+    --     timeout = 30000, -- Timeout in milliseconds
+    --     extra_request_body = {
+    --       temperature = 0.75,
+    --       max_tokens = 20480,
+    --     },
+    --   },
+    -- },
     -- web_search_engine = {
     --   provider = 'searxng',
     --   proxy = nil,
