@@ -1,32 +1,24 @@
 return {
   'nvim-neotest/neotest',
-  cond = false,
+  cond = true,
   dependencies = {
+    'nvim-neotest/nvim-nio',
     'nvim-lua/plenary.nvim',
-    'nvim-neotest/neotest-go',
+    { 'fredrikaverpil/neotest-golang', version = '*' },
+    -- 'nvim-neotest/neotest-go',
     'nvim-neotest/neotest-python',
-
+    'antoinemadec/FixCursorHold.nvim',
     -- Your other test adapters here
     'mfussenegger/nvim-dap',
     'leoluz/nvim-dap-go',
   },
   config = function()
-    -- get neotest namespace (api call creates or returns namespace)
-    local neotest_ns = vim.api.nvim_create_namespace 'neotest'
-    vim.diagnostic.config({
-      virtual_text = {
-        format = function(diagnostic)
-          local message = diagnostic.message:gsub('\n', ' '):gsub('\t', ' '):gsub('%s+', ' '):gsub('^%s+', '')
-          return message
-        end,
-      },
-    }, neotest_ns)
-
+    local neotest_golang_opts = {}
     require('neotest').setup {
-      -- your neotest config here
       adapters = {
         require 'neotest-python',
-        require 'neotest-go',
+        require 'neotest-golang'(neotest_golang_opts),
+        -- require 'neotest-go',
       },
     }
   end,
