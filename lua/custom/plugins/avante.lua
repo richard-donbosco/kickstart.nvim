@@ -10,13 +10,15 @@ return {
       openai = {
         endpoint = 'http://localhost:11211/api/openai/v1',
         -- endpoint = 'https://floodgate.g.apple.com/api/openai/v1',
-        model = 'aws:anthropic.claude-sonnet-4-20250514-v1:0', -- your desired model (or use gpt-4o, etc.)
+        model = 'gcp:gemini-2.5-pro',
+        -- model = 'aws:anthropic.claude-sonnet-4-20250514-v1:0', -- your desired model (or use gpt-4o, etc.)
+        context_window = 200000,
         extra_request_body = {
           timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
           temperature = 0.75,
           max_completion_tokens = 32000, -- Increase this to include reasoning tokens (for reasoning models)
           reasoning_effort = 'high', -- low|medium|high, only used for reasoning models
-          max_tokens = 42000,
+          max_tokens = 65536,
         },
       },
     },

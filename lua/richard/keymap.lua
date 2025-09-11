@@ -1,3 +1,26 @@
+-- Copy "filename:start:end (count lines)" for a visual selection — no edits
+vim.keymap.set('x', '<leader>yl', function()
+  -- Get current visual selection boundaries (more reliable than marks)
+  local start_pos = vim.fn.getpos 'v' -- Visual selection start
+  local end_pos = vim.fn.getpos '.' -- Current cursor position (visual end)
+  local s = math.min(start_pos[2], end_pos[2])
+  local e = math.max(start_pos[2], end_pos[2])
+
+  if s == 0 or e == 0 then
+    return
+  end
+  local count = e - s + 1
+
+  local file = vim.api.nvim_buf_get_name(0)
+  file = (file == '' and '[No Name]') or vim.fn.fnamemodify(file, ':p')
+
+  local text = (count == 1) and string.format('%s:%d', file, s) or string.format('%s:%d:%d (%d lines)', file, s, e, count)
+
+  vim.fn.setreg('+', text)
+  vim.notify('Copied ' .. text, vim.log.levels.INFO, { title = 'yl' })
+end, { desc = 'Copy filename with selected line range + count to clipboard', silent = true })
+
+--
 -- Move selected block of text with correct auto indent in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selected block of text down with correct auto indent' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selected block of text up with correct auto indent' })

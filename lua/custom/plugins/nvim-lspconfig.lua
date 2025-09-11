@@ -257,6 +257,11 @@ return {
       --     },
       --   },
       -- },
+      jdtls = {
+        settings = {
+          java = {},
+        },
+      },
     }
 
     -- Ensure the servers and tools above are installed
