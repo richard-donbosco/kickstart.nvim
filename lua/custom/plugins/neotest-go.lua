@@ -16,9 +16,10 @@ return {
     local neotest_golang_opts = {}
     require('neotest').setup {
       adapters = {
-        require 'neotest-python',
+        require 'neotest-python' {
+          dap = { justMyCode = true },
+        },
         require 'neotest-golang'(neotest_golang_opts),
-        -- require 'neotest-go',
       },
     }
   end,

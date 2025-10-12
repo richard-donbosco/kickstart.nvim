@@ -18,9 +18,11 @@ return {
     -- Define your formatters
     formatters_by_ft = {
       lua = { 'stylua' },
-      python = { 'isort', 'black' },
+      python = { 'ruff_format' },
       go = { 'gofumpt', 'golines', 'goimports' },
       rust = { 'rustfmt', lsp_format = 'fallback' },
+      typescript = { 'biome', 'biome-organize-imports' },
+      typescriptreact = { 'biome', 'biome-organize-imports' },
       -- groovy = { "groovyfmt" },
       -- javascript = { { "prettierd", "prettier" } },
     },

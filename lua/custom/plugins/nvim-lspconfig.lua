@@ -245,7 +245,9 @@ return {
       --     },
       --   },
       -- },
-      -- tsserver = {},
+      -- Typescript LSPs
+      -- ts_ls = {},
+      biome = {},
       -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
       -- yamlls = {},

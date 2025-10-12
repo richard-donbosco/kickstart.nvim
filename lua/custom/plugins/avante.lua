@@ -10,15 +10,13 @@ return {
       openai = {
         endpoint = 'http://localhost:11211/api/openai/v1',
         -- endpoint = 'https://floodgate.g.apple.com/api/openai/v1',
-        model = 'gcp:gemini-2.5-pro',
-        -- model = 'aws:anthropic.claude-sonnet-4-20250514-v1:0', -- your desired model (or use gpt-4o, etc.)
+        -- model = 'gcp:gemini-2.5-pro',
+        model = 'aws:anthropic.claude-sonnet-4-20250514-v1:0', -- your desired model (or use gpt-4o, etc.)
         context_window = 200000,
         extra_request_body = {
           timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-          temperature = 0.75,
-          max_completion_tokens = 32000, -- Increase this to include reasoning tokens (for reasoning models)
           reasoning_effort = 'high', -- low|medium|high, only used for reasoning models
-          max_tokens = 65536,
+          max_tokens = 65535,
         },
       },
     },
@@ -37,6 +35,40 @@ return {
     -- web_search_engine = {
     --   provider = 'searxng',
     --   proxy = nil,
+    -- },
+    --
+    -- system_prompt as function ensures LLM always has latest MCP server state
+    -- This is evaluated for every message, even in existing chats
+    system_prompt = function()
+      local hub = require('mcphub').get_hub_instance()
+      return hub and hub:get_active_servers_prompt() or ''
+    end,
+    -- Using function prevents requiring mcphub before it's loaded
+    custom_tools = function()
+      return {
+        require('mcphub.extensions.avante').mcp_tool(),
+      }
+    end,
+    -- {
+    --   acp_providers = {
+    --     ['gemini-cli'] = {
+    --       command = 'gemini',
+    --       args = { '--experimental-acp' },
+    --       env = {
+    --         NODE_NO_WARNINGS = '1',
+    --         GEMINI_API_KEY = os.getenv 'GEMINI_API_KEY',
+    --       },
+    --     },
+    --     ['claude-code'] = {
+    --       command = 'npx',
+    --       args = { '@zed-industries/claude-code-acp' },
+    --       env = {
+    --         NODE_NO_WARNINGS = '1',
+    --         ANTHROPIC_API_KEY = 'dummy-key',
+    --       },
+    --     },
+    --   },
+    --   -- other configuration options...
     -- },
     rag_service = { -- RAG Service configuration
       enabled = false, -- Enables the RAG service

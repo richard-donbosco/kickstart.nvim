@@ -194,9 +194,6 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
-  -- Detect tabstop and shiftwidth automatically
-  'NMAC427/guess-indent.nvim',
-
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
 
@@ -205,14 +202,6 @@ require('lazy').setup({
 
 -- Add custom keymap
 require 'richard.keymap'
-
--- Add autocmd for nvim lint
--- vim.api.nvim_create_autocmd('BufWritePre', {
---   pattern = '*',
---   callback = function()
---     require('lint').try_lint()
---   end,
--- })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
