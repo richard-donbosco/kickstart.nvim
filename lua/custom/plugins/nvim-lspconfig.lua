@@ -217,6 +217,8 @@ return {
         },
       },
       -- groovyls = {},
+
+      -- Rust Analyzer; Use this or rustacean.nvim
       -- rust_analyzer = {
       --   ['rust-analyzer'] = {
       --     imports = {
