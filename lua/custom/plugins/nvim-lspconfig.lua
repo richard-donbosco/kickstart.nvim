@@ -201,15 +201,6 @@ return {
         },
       },
       pyright = {},
-      -- rust_analyzer = {},
-      -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-      --
-      -- Some languages (like typescript) have entire language plugins that can be useful:
-      --    https://github.com/pmizio/typescript-tools.nvim
-      --
-      -- But for many setups, the LSP (`ts_ls`) will work just fine
-      -- ts_ls = {},
-      --
 
       lua_ls = {
         -- cmd = { ... },
@@ -225,7 +216,6 @@ return {
           },
         },
       },
-
       -- groovyls = {},
       -- rust_analyzer = {
       --   ['rust-analyzer'] = {
@@ -245,13 +235,18 @@ return {
       --     },
       --   },
       -- },
+      --
       -- Typescript LSPs
       -- ts_ls = {},
       biome = {},
-      -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-      -- yamlls = {},
+      -- HTML LSP
+      html = {},
 
+      -- YAML LSP
+      yamlls = {},
+
+      -- HELM LSP
       -- helm_ls = {
       --   ['helm-ls'] = {
       --     yamlls = {
@@ -259,6 +254,8 @@ return {
       --     },
       --   },
       -- },
+
+      -- JAVA LSP
       jdtls = {
         settings = {
           java = {},
