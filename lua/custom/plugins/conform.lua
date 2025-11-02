@@ -17,6 +17,7 @@ return {
   opts = {
     -- Define your formatters
     formatters_by_ft = {
+      swift = { 'swiftformat' },
       lua = { 'stylua' },
       python = { 'ruff_format' },
       go = { 'gofumpt', 'golines', 'goimports' },

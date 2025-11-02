@@ -7,6 +7,7 @@ return {
         go = { 'golangcilint' },
         -- groovy = { 'npm-groovy-lint', },
         python = { 'ruff' },
+        swift = { 'swiftlint' },
         typescript = { 'biomejs' },
       }
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })

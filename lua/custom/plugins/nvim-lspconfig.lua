@@ -257,12 +257,12 @@ return {
       --   },
       -- },
 
-      -- JAVA LSP
-      jdtls = {
-        settings = {
-          java = {},
-        },
-      },
+      -- -- JAVA LSP causing health check issues
+      -- jdtls = {
+      --   settings = {
+      --     java = {},
+      --   },
+      -- },
     }
 
     -- Ensure the servers and tools above are installed
