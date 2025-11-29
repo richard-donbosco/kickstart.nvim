@@ -190,81 +190,96 @@ return {
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
-      -- clangd = {},
-      gopls = {
+      mason = {
+        -- clangd = {},
         gopls = {
-          analyses = {
-            unusedparams = true,
-          },
-          staticcheck = true,
-          gofumpt = false,
-        },
-      },
-      pyright = {},
-
-      lua_ls = {
-        -- cmd = { ... },
-        -- filetypes = { ... },
-        -- capabilities = {},
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = 'Replace',
+          gopls = {
+            analyses = {
+              unusedparams = true,
             },
-            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { 'missing-fields' } },
+            staticcheck = true,
+            gofumpt = false,
+          },
+        },
+        pyright = {},
+
+        lua_ls = {
+          -- cmd = { ... },
+          -- filetypes = { ... },
+          -- capabilities = {},
+          settings = {
+            Lua = {
+              completion = {
+                callSnippet = 'Replace',
+              },
+              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+              -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+        -- groovyls = {},
+
+        -- Rust Analyzer; Use this or rustacean.nvim
+        -- rust_analyzer = {
+        --   ['rust-analyzer'] = {
+        --     imports = {
+        --       granularity = {
+        --         group = 'module',
+        --       },
+        --       prefix = 'self',
+        --     },
+        --     cargo = {
+        --       buildScripts = {
+        --         enable = true,
+        --       },
+        --     },
+        --     procMacro = {
+        --       enable = true,
+        --     },
+        --   },
+        -- },
+        --
+        -- Typescript LSPs
+        -- ts_ls = {},
+        biome = {},
+
+        -- HTML LSP
+        -- html = {},
+
+        -- YAML LSP
+        -- yamlls = {},
+
+        -- HELM LSP
+        -- helm_ls = {
+        --   ['helm-ls'] = {
+        --     yamlls = {
+        --       path = 'yaml-language-server',
+        --     },
+        --   },
+        -- },
+
+        -- -- JAVA LSP causing health check issues
+        -- jdtls = {
+        --   settings = {
+        --     java = {},
+        --   },
+        -- },
+      },
+      others = {
+        sourcekit = {
+          cmd = {
+            'xcrun',
+            'sourcekit-lsp',
           },
         },
       },
-      -- groovyls = {},
-
-      -- Rust Analyzer; Use this or rustacean.nvim
-      -- rust_analyzer = {
-      --   ['rust-analyzer'] = {
-      --     imports = {
-      --       granularity = {
-      --         group = 'module',
-      --       },
-      --       prefix = 'self',
-      --     },
-      --     cargo = {
-      --       buildScripts = {
-      --         enable = true,
-      --       },
-      --     },
-      --     procMacro = {
-      --       enable = true,
-      --     },
-      --   },
-      -- },
-      --
-      -- Typescript LSPs
-      -- ts_ls = {},
-      biome = {},
-
-      -- HTML LSP
-      html = {},
-
-      -- YAML LSP
-      yamlls = {},
-
-      -- HELM LSP
-      -- helm_ls = {
-      --   ['helm-ls'] = {
-      --     yamlls = {
-      --       path = 'yaml-language-server',
-      --     },
-      --   },
-      -- },
-
-      -- -- JAVA LSP causing health check issues
-      -- jdtls = {
-      --   settings = {
-      --     java = {},
-      --   },
-      -- },
     }
 
+    for server, config in pairs(vim.tbl_extend('keep', servers.mason, servers.others)) do
+      if not vim.tbl_isempty(config) then
+        vim.lsp.config(server, config)
+      end
+    end
     -- Ensure the servers and tools above are installed
     --
     -- To check the current status of installed tools and/or manually install
@@ -278,7 +293,7 @@ return {
     --
     -- You can add other tools here that you want Mason to install
     -- for you, so that they are available from within Neovim.
-    local ensure_installed = vim.tbl_keys(servers or {})
+    local ensure_installed = vim.tbl_keys(servers.mason or {})
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
     })
@@ -286,17 +301,11 @@ return {
 
     require('mason-lspconfig').setup {
       ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-      automatic_installation = false,
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for ts_ls)
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
-        end,
-      },
+      automatic_enable = true,
     }
+
+    if not vim.tbl_isempty(servers.others) then
+      vim.lsp.enable(vim.tbl_keys(servers.others))
+    end
   end,
 }

@@ -17,7 +17,8 @@ return {
     require('neotest').setup {
       adapters = {
         require 'neotest-python' {
-          dap = { justMyCode = true },
+          dap = { justMyCode = false },
+          args = { '-s' },
         },
         require 'neotest-golang'(neotest_golang_opts),
       },
